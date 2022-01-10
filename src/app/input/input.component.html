@@ -1,0 +1,12 @@
+<h1>
+  Add todo
+  <h1>
+    <input
+      #newTodo
+      (keyup.enter)="addTodo(newTodo.value)"
+      listName.value="''"
+    />
+
+    <button (click)="addTodo(newTodo.value)">Add new todo</button>
+  </h1>
+</h1>

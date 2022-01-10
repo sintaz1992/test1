@@ -1,0 +1,14 @@
+<app-header
+  [title]="title"
+  [listName]="listName"
+  (newNameEvent)="newName($event)"
+></app-header
+><app-input (newTodoEvent)="newTodo($event)"></app-input>
+<app-todolist
+  [todos]="list.todos"
+  (doneEvent)="todoDone($event)"
+></app-todolist>
+<app-donelist
+  [todos]="list.dones"
+  (doneEvent)="doneDone($event)"
+></app-donelist>

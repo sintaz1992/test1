@@ -1,0 +1,36 @@
+:host {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 18px;
+  color: #333;
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 8px 0;
+}
+
+app-header {
+  flex: 1 100%;
+  height: 30%;
+  min-height: 200px;
+}
+app-input {
+  flex: 1 auto;
+  min-width: 300px;
+}
+
+app-todolist {
+  flex: 1 auto;
+  min-width: 300px;
+}
+
+app-donelist {
+  flex: 1 auto;
+  min-width: 300px;
+}

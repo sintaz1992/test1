@@ -1,0 +1,17 @@
+app-todo-item {
+  padding: 0px 0px 2px 2px;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: black;
+}
+
+ul {
+  list-style-type: none;
+  align-items: center;
+}
+li {
+  margin: 8px;
+  text-align: end;
+  align-items: right;
+  align-content: right;
+}
