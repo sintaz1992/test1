@@ -24,14 +24,19 @@ export class BackendService {
             const todos = x.fields.todos.arrayValue.values?.map(
               (x: any) => x.stringValue
             );
+           todos.includes('')? todos.splice(todos.indexOf(''),1):{}
             const dones = x.fields.dones.arrayValue.values?.map(
               (x: any) => x.stringValue
             );
+            dones.includes('')? dones.splice(dones.indexOf(''),1):{}
+
             return { name: this.name, todos, dones };
           }),
-          catchError((err) => of({ name: this.name, todos: [], dones: [] }))
+          catchError((err) =>
+           of({ name: this.name, todos: [], dones: [] }))
         );
-    } catch (_) {
+    }
+     catch (_) {
       return of({ name: this.name, todos: [], dones: [] });
     }
   }
@@ -43,16 +48,16 @@ export class BackendService {
         fields: {
           todos: {
             arrayValue: {
-              values: list.todos?.map((x) => {
+              values: (list.todos && list.todos.length>0)? list.todos.map((x) => {
                 return { stringValue: x };
-              }),
+              }):[{stringValue:''}],
             },
           },
           dones: {
             arrayValue: {
-              values: list.dones?.map((x) => {
+              values: (list.dones && list.dones.length>0)? list.dones.map((x) => {
                 return { stringValue: x };
-              }),
+              }):[{stringValue:''}],
             },
           },
         },

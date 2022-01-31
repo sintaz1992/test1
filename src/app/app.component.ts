@@ -18,18 +18,28 @@ export class AppComponent {
     backend.name = this.listName;
     this.list = { name: this.listName, todos: [], dones: [] };
     backend.getRemoteList(this.listName).subscribe((data: List) => {
-      if (data) {
+      if (data) {   
         this.list = data;
-      }
+        if(this.list.dones===[''])
+        {
+          this.list.dones=[]
+        }
+        if(this.list.todos===[''])
+        {
+          this.list.todos=[]
+        }
+          }
     });
   }
 
   newName(name: string) {
     this.listName = name;
-    this.backend.getRemoteList(this.listName).subscribe((data: List) => {
-      if (data) {
+    this.backend.getRemoteList(this.listName)
+    .subscribe((data: List) => {
+      if (data) {   
         this.list = data;
-      }
+     
+          }
     });
   }
 
@@ -40,13 +50,14 @@ export class AppComponent {
   }
 
   todoDone(done: string) {
-   
     const idx = this.list.todos?.findIndex((dString) => dString === done);
     this.list.todos = this.list.todos
       ?.slice(0, idx)
       .concat(this.list.todos?.slice((idx as number) + 1));
     this.list.dones?.push(done);
-    this.backend.save(this.list);
+    this.backend.save(this.list).subscribe((data) => {
+    });
+   
   }
 
   doneDone(done: string) {
@@ -55,7 +66,8 @@ export class AppComponent {
       ?.slice(0, idx)
       .concat(this.list.dones?.slice((idx as number) + 1));
     this.list.todos?this.list.todos.push(done):{};
-   this.backend.save(this.list);
+   this.backend.save(this.list).subscribe((data) => {
+  });
   }
 
   delete(item: number) {
@@ -63,5 +75,7 @@ export class AppComponent {
       ...(this.list.dones?.slice(0, item) ?? []),
       ...(this.list.dones?.slice(item + 1) ?? [])
     );
+    this.backend.save(this.list).subscribe((data) => {
+    });
   }
 }
