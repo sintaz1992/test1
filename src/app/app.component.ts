@@ -36,7 +36,6 @@ export class AppComponent {
   newTodo(todo: string) {
     this.list.todos?.push(todo);
     this.backend.save(this.list).subscribe((data) => {
-      console.log('Backed up data!', data);
     });
   }
 
@@ -48,7 +47,6 @@ export class AppComponent {
       .concat(this.list.todos?.slice((idx as number) + 1));
     this.list.dones?.push(done);
     this.backend.save(this.list);
-    console.log('Backed up data!');
   }
 
   doneDone(done: string) {
@@ -57,6 +55,13 @@ export class AppComponent {
       ?.slice(0, idx)
       .concat(this.list.dones?.slice((idx as number) + 1));
     this.list.todos?this.list.todos.push(done):{};
-    this.backend.save(this.list);
+   this.backend.save(this.list);
+  }
+
+  delete(item: number) {
+    this.list.dones = Array(
+      ...(this.list.dones?.slice(0, item) ?? []),
+      ...(this.list.dones?.slice(item + 1) ?? [])
+    );
   }
 }

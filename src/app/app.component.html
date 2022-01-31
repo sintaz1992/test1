@@ -11,4 +11,5 @@
 <app-donelist
   [todos]="list.dones"
   (doneEvent)="doneDone($event)"
+  (deleteEvent)="delete($event)"
 ></app-donelist>

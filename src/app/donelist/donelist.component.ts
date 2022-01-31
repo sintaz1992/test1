@@ -9,6 +9,7 @@ import { t } from '../types';
 export class DonelistComponent implements OnInit {
   @Input() todos?: string[];
   @Output() doneEvent = new EventEmitter<string>();
+  @Output() deleteEvent = new EventEmitter<number>();
 
   itemType = t.todo;
   constructor() {}
@@ -19,10 +20,8 @@ export class DonelistComponent implements OnInit {
     this.doneEvent.emit(event[0]);
   }
 
-  delete(item: number) {
-    this.todos = Array(
-      ...(this.todos?.slice(0, item) ?? []),
-      ...(this.todos?.slice(item + 1) ?? [])
-    );
+  delete(event: number) {
+    this.deleteEvent.emit(event);
+
   }
 }
