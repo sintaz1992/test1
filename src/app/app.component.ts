@@ -41,13 +41,14 @@ export class AppComponent {
   }
 
   todoDone(done: string) {
+   
     const idx = this.list.todos?.findIndex((dString) => dString === done);
     this.list.todos = this.list.todos
       ?.slice(0, idx)
       .concat(this.list.todos?.slice((idx as number) + 1));
     this.list.dones?.push(done);
     this.backend.save(this.list);
-    //console.log('Backed up data!');
+    console.log('Backed up data!');
   }
 
   doneDone(done: string) {
@@ -55,10 +56,7 @@ export class AppComponent {
     this.list.dones = this.list.dones
       ?.slice(0, idx)
       .concat(this.list.dones?.slice((idx as number) + 1));
-    if (this.list.todos) {
-      this.list.todos[1] = done;
-    }
+    this.list.todos?this.list.todos.push(done):{};
     this.backend.save(this.list);
-    console.log('Backed up data!');
   }
 }
