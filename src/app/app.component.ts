@@ -55,7 +55,7 @@ export class AppComponent {
     this.list.dones = this.list.dones
       ?.slice(0, idx)
       .concat(this.list.dones?.slice((idx as number) + 1));
-    this.list.todos?this.list.todos.push(done):{};
+    this.list.todos?this.list.todos.unshift(done):{};
    this.backend.save(this.list).subscribe((data) => {
   });
   }
