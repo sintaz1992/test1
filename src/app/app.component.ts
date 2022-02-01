@@ -16,8 +16,8 @@ export class AppComponent {
   constructor(private backend: BackendService) {
     this.listName = Randomizer.generateRandomListName();
     this.list = { name: this.listName, todos: [], dones: [] };
-    this.backend.getList(this.listName).then(data=>{} 
-  ).catch(e=>console.log(e));
+    this.backend.updateList(this.list,this.listName).subscribe((data) => {
+    });
   }
 
   newName(name: string) {
