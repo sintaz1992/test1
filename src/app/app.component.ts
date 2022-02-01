@@ -19,15 +19,6 @@ export class AppComponent {
     this.list = { name: this.listName, todos: [], dones: [] };
     backend.getRemoteList(this.listName).subscribe((data: List) => {
       if (data) {   
-        this.list = data;
-        if(this.list.dones===[''])
-        {
-          this.list.dones=[]
-        }
-        if(this.list.todos===[''])
-        {
-          this.list.todos=[]
-        }
           }
     });
   }
@@ -38,7 +29,6 @@ export class AppComponent {
     .subscribe((data: List) => {
       if (data) {   
         this.list = data;
-     
           }
     });
   }
