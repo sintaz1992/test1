@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { List } from './types';
-import { catchError, map, of, tap } from 'rxjs';
+import { catchError, firstValueFrom, map, of} from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -12,9 +12,9 @@ export class BackendService {
 
   constructor(private client: HttpClient) {}
 
-  getList(name: string) {
+  async getList(name: string) {
     try {
-      return this.client
+      return await firstValueFrom(this.client
         .get<any>(`${this.backendUrl}${name}`, {
           responseType: 'json',
         })
@@ -32,11 +32,11 @@ export class BackendService {
             return { name: name, todos, dones };
           }),
           catchError((err) =>
-           of({ name: name, todos: [], dones: [] }))
-        );
+           firstValueFrom(of({ name: name, todos: [], dones: [] })))
+        ));
     }
      catch (_) {
-      return of({ name: name, todos: [], dones: [] });
+      return firstValueFrom(of({ name: name, todos: [], dones: [] }));
     }
   }
   //  in updateList in case there is no todos or lists, we send a dummy data , otherwise it will send undefined to the firestore

@@ -16,20 +16,15 @@ export class AppComponent {
   constructor(private backend: BackendService) {
     this.listName = Randomizer.generateRandomListName();
     this.list = { name: this.listName, todos: [], dones: [] };
-    backend.getList(this.listName).subscribe((data: List) => {
-      if (data) {   
-          }
-    });
+    this.backend.getList(this.listName).then(data=>{} 
+  ).catch(e=>console.log(e));
   }
 
   newName(name: string) {
     this.listName = name;
-    this.backend.getList(this.listName)
-    .subscribe((data: List) => {
-      if (data) {   
-        this.list = data;
-          }
-    });
+    this.backend.getList(this.listName).then(data=>
+        this.list = data 
+    ).catch(e=>console.log(e));
   }
 
   newTodo(todo: string) {
