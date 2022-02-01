@@ -15,9 +15,8 @@ export class AppComponent {
 
   constructor(private backend: BackendService) {
     this.listName = Randomizer.generateRandomListName();
-    backend.name = this.listName;
     this.list = { name: this.listName, todos: [], dones: [] };
-    backend.getRemoteList(this.listName).subscribe((data: List) => {
+    backend.getList(this.listName).subscribe((data: List) => {
       if (data) {   
           }
     });
@@ -25,7 +24,7 @@ export class AppComponent {
 
   newName(name: string) {
     this.listName = name;
-    this.backend.getRemoteList(this.listName)
+    this.backend.getList(this.listName)
     .subscribe((data: List) => {
       if (data) {   
         this.list = data;
@@ -35,7 +34,7 @@ export class AppComponent {
 
   newTodo(todo: string) {
     this.list.todos?.push(todo);
-    this.backend.save(this.list).subscribe((data) => {
+    this.backend.updateList(this.list,this.listName).subscribe((data) => {
     });
   }
 
@@ -45,7 +44,7 @@ export class AppComponent {
       ?.slice(0, idx)
       .concat(this.list.todos?.slice((idx as number) + 1));
     this.list.dones?.push(done);
-    this.backend.save(this.list).subscribe((data) => {
+    this.backend.updateList(this.list,this.listName).subscribe((data) => {
     });
    
   }
@@ -56,7 +55,7 @@ export class AppComponent {
       ?.slice(0, idx)
       .concat(this.list.dones?.slice((idx as number) + 1));
     this.list.todos?this.list.todos.unshift(done):{};
-   this.backend.save(this.list).subscribe((data) => {
+   this.backend.updateList(this.list,this.listName).subscribe((data) => {
   });
   }
 
@@ -65,7 +64,7 @@ export class AppComponent {
       ...(this.list.dones?.slice(0, item) ?? []),
       ...(this.list.dones?.slice(item + 1) ?? [])
     );
-    this.backend.save(this.list).subscribe((data) => {
+    this.backend.updateList(this.list,this.listName).subscribe((data) => {
     });
   }
 }

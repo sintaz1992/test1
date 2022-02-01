@@ -10,10 +10,9 @@ export class BackendService {
   backendUrl =
     'https://firestore.googleapis.com/v1/projects/hazu-playground/databases/(default)/documents/todos/';
 
-  name = '';
   constructor(private client: HttpClient) {}
 
-  getRemoteList(name: string) {
+  getList(name: string) {
     try {
       return this.client
         .get<any>(`${this.backendUrl}${name}`, {
@@ -30,20 +29,20 @@ export class BackendService {
             );
             dones.includes('')? dones.splice(dones.indexOf(''),1):{}
 
-            return { name: this.name, todos, dones };
+            return { name: name, todos, dones };
           }),
           catchError((err) =>
-           of({ name: this.name, todos: [], dones: [] }))
+           of({ name: name, todos: [], dones: [] }))
         );
     }
      catch (_) {
-      return of({ name: this.name, todos: [], dones: [] });
+      return of({ name: name, todos: [], dones: [] });
     }
   }
-
-  save(list: List) {
+  //  in updateList in case there is no todos or lists, we send a dummy data , otherwise it will send undefined to the firestore
+  updateList(list: List, name: String) {
     return this.client.patch<{ status: string }>(
-      `${this.backendUrl}${this.name}`,
+      `${this.backendUrl}${name}`,
       {
         fields: {
           todos: {
