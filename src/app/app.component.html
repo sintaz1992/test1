@@ -1,7 +1,7 @@
 <app-header
   [title]="title"
-  [listName]="listName"
-  (newNameEvent)="newName($event)"
+  [listName]="list.name"
+  (setNameEvent)="setName($event)"
 ></app-header
 ><app-input (newTodoEvent)="newTodo($event)"></app-input>
 <app-todolist
@@ -10,6 +10,6 @@
 ></app-todolist>
 <app-donelist
   [todos]="list.dones"
-  (doneEvent)="doneDone($event)"
-  (deleteEvent)="delete($event)"
+  (doneEvent)="done_Todos($event)"
+  (deleteEvent)="deleteTodo($event)"
 ></app-donelist>

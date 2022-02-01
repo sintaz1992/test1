@@ -10,56 +10,49 @@ import { List } from './types';
 })
 export class AppComponent {
   title = 'Remote todo list';
-  listName: string;
   list: List;
 
   constructor(private backend: BackendService) {
-    this.listName = Randomizer.generateRandomListName();
-    this.list = { name: this.listName, todos: [], dones: [] };
-    this.backend.updateList(this.list,this.listName).subscribe((data) => {
+    const randomName = Randomizer.generateRandomListName();
+    this.list = { name: randomName, todos: [], dones: [] };
+    this.backend.updateList(this.list).subscribe((data) => {
     });
   }
 
-  newName(name: string) {
-    this.listName = name;
-    this.backend.getList(this.listName).then(data=>
+  // set the previuosly-generated name and fetch the data from server
+  setName(name: string) {
+    this.list.name = name;
+    this.backend.getList(this.list.name).then(data=>
         this.list = data 
     ).catch(e=>console.log(e));
   }
 
+    // adds a new todo to the todos list
   newTodo(todo: string) {
     this.list.todos?.push(todo);
-    this.backend.updateList(this.list,this.listName).subscribe((data) => {
+    this.backend.updateList(this.list).subscribe((data) => {
     });
   }
-
-  todoDone(done: string) {
-    const idx = this.list.todos?.findIndex((dString) => dString === done);
-    this.list.todos = this.list.todos
-      ?.slice(0, idx)
-      .concat(this.list.todos?.slice((idx as number) + 1));
-    this.list.dones?.push(done);
-    this.backend.updateList(this.list,this.listName).subscribe((data) => {
+ // moves a task from todos ro done
+  todoDone(todo: string) {
+      this.list.todos = this.list.todos?.filter((task) => task !== todo);
+      this.list.dones?.push(todo);
+    this.backend.updateList(this.list).subscribe((data) => {
     });
    
   }
-
-  doneDone(done: string) {
-    const idx = this.list.dones?.findIndex((dString) => dString === done);
-    this.list.dones = this.list.dones
-      ?.slice(0, idx)
-      .concat(this.list.dones?.slice((idx as number) + 1));
-    this.list.todos?this.list.todos.unshift(done):{};
-   this.backend.updateList(this.list,this.listName).subscribe((data) => {
+// moves a task from dones to todos
+  done_Todos(done: string) {
+    this.list.dones = this.list.dones?.filter((task) => task !== done);
+    this.list.todos?.unshift(done);
+   this.backend.updateList(this.list).subscribe((data) => {
   });
   }
 
-  delete(item: number) {
-    this.list.dones = Array(
-      ...(this.list.dones?.slice(0, item) ?? []),
-      ...(this.list.dones?.slice(item + 1) ?? [])
-    );
-    this.backend.updateList(this.list,this.listName).subscribe((data) => {
+  // delete a task from server
+  deleteTodo(item: number) {
+    this.list.dones?.splice(item,1)
+    this.backend.updateList(this.list).subscribe((data) => {
     });
   }
 }

@@ -10,12 +10,12 @@ export class HeaderComponent implements OnInit {
   title!: string;
   @Input()
   listName!: string;
-  @Output() newNameEvent = new EventEmitter<string>();
+  @Output() setNameEvent = new EventEmitter<string>();
   constructor() {}
 
   ngOnInit(): void {}
 
   setListName(name: string) {
-    this.newNameEvent.emit(name);
+    this.setNameEvent.emit(name);
   }
 }

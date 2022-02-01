@@ -40,11 +40,9 @@ export class BackendService {
     }
   }
   //  in updateList in case there is no todos or lists, we send a dummy data , otherwise it will send undefined to the firestore
-  updateList(list: List, name: String) {
-
-
+  updateList(list: List) {
     return this.client.patch<{ status: string }>(
-      `${this.backendUrl}${name}`,
+      `${this.backendUrl}${list.name}`,
       {
         fields: {
           todos: {
