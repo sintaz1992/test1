@@ -14,4 +14,6 @@ describe('Randomizer', () => {
       /[^]*[A]*[B]*[C]*/
     );
   });
+
+  // it should check if the generated name if different than names in the databsse (its unique) 
 });

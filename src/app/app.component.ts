@@ -52,7 +52,7 @@ export class AppComponent {
   // delete a task from server
   deleteTodo(item: number) {
     this.list.dones?.splice(item,1)
-    this.backend.updateList(this.list).subscribe((data) => {
+    this.backend.updateList(this.list).subscribe((data) => {    
     });
   }
 }

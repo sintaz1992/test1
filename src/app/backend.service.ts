@@ -64,7 +64,7 @@ export class BackendService {
       {
         responseType: 'json',
       }
-    );
+    ).pipe(catchError((e)=>of({ error: e })));
  
   
   }
