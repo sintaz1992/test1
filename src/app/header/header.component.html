@@ -1,8 +1,7 @@
-<h1>{{ title }}</h1>
+<h1>Your list name is: {{ listName }}</h1>
 <input
   #listNameInput
   (keyup.enter)="setListName(listNameInput.value)"
-  value="{{ listName }}"
+  value=""
 />
-
 <button (click)="setListName(listNameInput.value)">Set List Name</button>
