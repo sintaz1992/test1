@@ -1,10 +1,9 @@
-<h1>
-    <input
+<div>
+<input
       #newTodo
       (keyup.enter)="addTodo(newTodo.value)"
       listName.value="''"
     />
-
     <button (click)="addTodo(newTodo.value)">Add new todo</button>
-</h1>
+</div>
 

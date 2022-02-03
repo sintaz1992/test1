@@ -1,11 +1,12 @@
-<h1>Done list</h1>
+<h3>Done list</h3>
 <ul>
   <li *ngFor="let todo of todos; index as idx">
+    <button (click)="delete(idx)">🗑</button>
     <app-todo-item
       [items]="todo"
       [todoType]="itemType"
       (doneEvent)="todoDone($event)"
     ></app-todo-item>
-    <button (click)="delete(idx)">🗑</button>
+    
   </li>
 </ul>

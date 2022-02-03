@@ -1,15 +1,24 @@
 <app-header
-  [title]="title"
+  [title]="title" 
   [listName]="list.name"
   (setNameEvent)="setName($event)"
-></app-header
-><app-input (newTodoEvent)="newTodo($event)"></app-input>
-<app-todolist
-  [todos]="list.todos"
-  (doneEvent)="todoDone($event)"
-></app-todolist>
-<app-donelist
-  [todos]="list.dones"
-  (doneEvent)="done_Todos($event)"
-  (deleteEvent)="deleteTodo($event)"
-></app-donelist>
+></app-header>
+<hr>
+<div class="grid-container">
+  <div class="grid-item">
+    <app-input (newTodoEvent)="newTodo($event)"></app-input>
+  </div>
+  <div class="grid-item"></div>
+  <div class="grid-item">
+  <app-todolist
+      [todos]="list.todos"
+      (doneEvent)="todoDone($event)"
+    ></app-todolist>
+  </div>
+  <div class="grid-item"><app-donelist
+    [todos]="list.dones"
+    (doneEvent)="done_Todos($event)"
+    (deleteEvent)="deleteTodo($event)"
+  ></app-donelist></div>
+  
+</div>

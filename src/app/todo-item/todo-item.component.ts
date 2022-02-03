@@ -14,6 +14,7 @@ export class TodoItemComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
+    console.log(this.todoType)
     this.dSymbol = this.todoType === t.todo ? '✅ ' : '♻️';
   }
 
