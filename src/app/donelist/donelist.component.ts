@@ -11,7 +11,7 @@ export class DonelistComponent implements OnInit {
   @Output() doneEvent = new EventEmitter<string>();
   @Output() deleteEvent = new EventEmitter<number>();
 
-  itemType = t.todo;
+  itemType = t.done;
   constructor() {}
 
   ngOnInit(): void {}
