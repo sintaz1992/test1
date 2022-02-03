@@ -25,11 +25,11 @@ describe('BackendService', () => {
   });
 
   it('should get from server and parse result', () => {
-    service.name = 'myListName';
+ //   service.name = 'myListName';
     service.backendUrl = '/mock/';
 
     service
-      .getRemoteList('myListName')
+      .getList('myListName')
       .subscribe((data) =>
         expect(data).toEqual({ name: 'myListName', todos: [], dones: [] })
       );
@@ -53,4 +53,6 @@ describe('BackendService', () => {
 
     httpTestingController.verify();
   });
+
+//  it should check in slow network conditions, if data can be readen from the api and store in this.list
 });

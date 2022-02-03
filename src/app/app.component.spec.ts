@@ -58,4 +58,7 @@ describe('AppComponent', () => {
       dones: ['todo4'],
     });
   });
+
+  //it should delete the task from the this.list.done (If you press delete, the code should check if its removed from the this.list.done)
+  //it should check when reading data from api the type is not undefined
 });
